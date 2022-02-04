@@ -1,3 +1,5 @@
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pupil-labs/realtime-network-api/main.svg)](https://results.pre-commit.ci/latest/github/pupil-labs/realtime-network-api/main)
+
 # Pupil Labs Realtime Network API
 
 This repository contains the [OpenAPI](https://swagger.io/specification/) specification
