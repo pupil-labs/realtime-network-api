@@ -14,16 +14,6 @@ paths:
       - status
       summary: "phone status; upgrade to websocket connection; updates about Phone/Sensor/Recording/NetworkDevice/Event updates"
       description: ""
-      parameters:
-        - in: query
-          name: models
-          description: filter stream with these models
-          schema:
-            type: array
-            items:
-              type: string
-              enum: [Phone, Sensor, Recording, NetworkDevice, Event]
-          style: simple
       responses:
         '200':
           description: "phone status"
