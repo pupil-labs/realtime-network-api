@@ -1,5 +1,5 @@
 openapi: "3.0.0"
-info:  
+info:
   description: "Remote control and stream data from Pupil Invsibile Companion"
   version: "1.0.0"
   title: "Pupil Labs Realtime API"
@@ -19,13 +19,13 @@ paths:
           description: "phone status"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: '#/components/schemas/StatusEnvelope'
         '101':
           description: "upgrade to websocket, send updates for Phone/Sensor/Recording/NetworkDevice/Event"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: '#/components/schemas/Status'
 
   /recording:start:
@@ -35,7 +35,7 @@ paths:
       summary: "start recording"
       description: ""
       responses:
-        '200':  
+        '200':
           description: 'recording started'
           content:
             application/json:
@@ -51,11 +51,11 @@ paths:
       summary: "stop and save recording"
       description: "stop and save recording, only possible if template has no required fields"
       responses:
-        '200':  
+        '200':
           description: 'recording stopped and saved'
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: '#/components/schemas/RecordingStopEnvelope'
         '500':
           description: "recording stop and save failed <br />Possible errors: <br /> - Recording not running <br /> - template has required fields"
@@ -67,7 +67,7 @@ paths:
       summary: "cancel recording"
       description: "cancel recording"
       responses:
-        '200':  
+        '200':
           description: 'recording stopped and discarded'
           content:
             application/json:
@@ -84,16 +84,16 @@ paths:
         description: recording event
         content:
           application/json:
-            schema: 
+            schema:
               $ref: '#/components/schemas/EventPost'
       summary: "create recording event"
       description: ""
       responses:
-        '200':  
+        '200':
           description: 'recording event added'
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: '#/components/schemas/EventEnvelope'
 
 components:
@@ -108,7 +108,7 @@ components:
       discriminator:
         propertyName: envelope_message
     Status:
-      properties: 
+      properties:
         model:
           type: string
         data:
@@ -161,13 +161,13 @@ components:
       properties:
         version:
           type: string
-        world_camera_serial: 
+        world_camera_serial:
           type: string
           readOnly: true
         glasses_serial:
           type: string
           readOnly: true
-        
+
     NetworkDevice:
       properties:
         ip:
@@ -287,7 +287,7 @@ components:
         protocol:
           type: string
           readOnly: true
-        ip: 
+        ip:
           type: string
           readOnly: true
         port:
