@@ -284,6 +284,9 @@ components:
         sensor:
           type: string
           enum: ["world", "gaze"]
+        conn_type:
+          type: string
+          enum: ["DIRECT", "WEBSOCKET"]
         protocol:
           type: string
           readOnly: true
