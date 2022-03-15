@@ -99,6 +99,7 @@ components:
   schemas:
     Envelope:
       type: object
+      required: [message, result]
       properties:
         message:
           type: string
@@ -106,7 +107,10 @@ components:
           type: object
       discriminator:
         propertyName: envelope_message
+
     Status:
+      type: object
+      required: [model, data]
       properties:
         model:
           type: string
@@ -118,56 +122,58 @@ components:
             - $ref: "#/components/schemas/NetworkDevice"
             - $ref: "#/components/schemas/Sensor"
             - $ref: "#/components/schemas/Phone"
+
     StatusEnvelope:
+      type: object
       allOf:
         - $ref: "#/components/schemas/Envelope"
         - type: object
+          required: [result]
           properties:
             result:
               type: array
               items:
                 $ref: "#/components/schemas/Status"
+
     Phone:
+      type: object
+      required:
+        [ip, port, device_id, device_name, battery_level, memory, memory_state]
       properties:
         ip:
           type: string
           format: "ip"
-          readOnly: true
         port:
           type: number
-          readOnly: true
         device_id:
           type: string
-          readOnly: true
         device_name:
           type: string
-          readOnly: true
         battery_level:
           type: number
-          readOnly: true
         battery_state:
           type: string
           enum: ["OK", "LOW", "CRITICAL"]
-          readOnly: true
         memory:
           type: number
-          readOnly: true
         memory_state:
           type: string
           enum: ["OK", "LOW", "CRITICAL"]
-          readOnly: true
+
     Hardware:
+      type: object
+      required: [version, world_camera_serial, glasses_serial]
       properties:
         version:
           type: string
         world_camera_serial:
           type: string
-          readOnly: true
         glasses_serial:
           type: string
-          readOnly: true
 
     NetworkDevice:
+      type: object
+      required: [ip, device_id, device_name, connected]
       properties:
         ip:
           type: string
@@ -184,6 +190,8 @@ components:
           readOnly: true
 
     RecordingStart:
+      type: object
+      required: [id]
       properties:
         id:
           type: string
@@ -191,14 +199,18 @@ components:
           readOnly: true
 
     RecordingStartEnvelope:
+      type: object
       allOf:
         - $ref: "#/components/schemas/Envelope"
         - type: object
+          required: [result]
           properties:
             result:
               $ref: "#/components/schemas/RecordingStart"
 
     RecordingStop:
+      type: object
+      required: [id, rec_duration_ns]
       properties:
         id:
           type: string
@@ -210,13 +222,17 @@ components:
           readOnly: true
 
     RecordingStopEnvelope:
+      type: object
       allOf:
         - $ref: "#/components/schemas/Envelope"
         - type: object
+          required: [result]
           properties:
             result:
               $ref: "#/components/schemas/RecordingStop"
     Recording:
+      type: object
+      required: [id, rec_duration_ns, message, action]
       properties:
         id:
           type: string
@@ -231,6 +247,8 @@ components:
           enum: ["START", "STOP", "SAVE", "DISCARD", "ERROR"]
 
     RecordingCancel:
+      type: object
+      required: [id]
       properties:
         id:
           type: string
@@ -238,13 +256,18 @@ components:
           readOnly: true
 
     RecordingCancelEnvelope:
+      type: object
       allOf:
         - $ref: "#/components/schemas/Envelope"
         - type: object
+          required: [result]
           properties:
             result:
               $ref: "#/components/schemas/RecordingCancel"
+
     Event:
+      type: object
+      required: [name, timestamp, recording_id]
       properties:
         name:
           type: string
@@ -260,6 +283,8 @@ components:
         recording_id: "123e4567-e89b-12d3-a456-426614174000"
 
     EventPost:
+      type: object
+      required: [name]
       properties:
         name:
           type: string
@@ -271,14 +296,19 @@ components:
         timestamp: 1643899966134527000
 
     EventEnvelope:
+      type: object
       allOf:
         - $ref: "#/components/schemas/Envelope"
         - type: object
+          required: [result]
           properties:
             result:
               $ref: "#/components/schemas/Event"
+
     Sensor:
       type: object
+      required:
+        ["sensor", "conn_type", "protocol", "ip", "port", "params", "connected"]
       properties:
         sensor:
           type: string
@@ -288,19 +318,14 @@ components:
           enum: ["DIRECT", "WEBSOCKET"]
         protocol:
           type: string
-          readOnly: true
         ip:
           type: string
-          readOnly: true
         port:
           type: integer
-          readOnly: true
         params:
           type: string
-          readOnly: true
         connected:
           type: boolean
-          readOnly: true
       example:
         sensor: "world"
         protocol: "rtsp"
