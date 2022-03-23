@@ -17,4 +17,3 @@ https://pupil-labs.github.io/realtime-network-api/ or see the
 
 We have written a python client as a wrapper around the API that is very easy to use.
 - [Realtime Python API](https://pupil-labs-realtime-api.readthedocs.io)
-
