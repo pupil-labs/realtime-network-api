@@ -40,7 +40,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RecordingStartEnvelope"
-        "500":
+        "400":
           description: "recording start failed <br />Possible errors: <br /> - Recording running <br /> - Template has required fields <br /> - Low battery <br /> - Low storage <br /> - No wearer selected <br /> - No workspace selected <br /> - Setup bottom sheets not completed"
 
   /recording:stop_and_save:
@@ -56,7 +56,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RecordingStopEnvelope"
-        "500":
+        "400":
           description: "recording stop and save failed <br />Possible errors: <br /> - Recording not running <br /> - template has required fields"
 
   /recording:cancel:
@@ -72,7 +72,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RecordingCancelEnvelope"
-        "500":
+        "400":
           description: "recording cancel failed <br />Possible errors: <br /> - Recording not running"
 
   /event:
