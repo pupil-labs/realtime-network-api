@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  description: "Remote control and stream data from Pupil Invsibile Companion"
+  description: "Remote control and stream data from Pupil Invisible Companion"
   version: "1.0.0"
   title: "Pupil Labs Realtime API"
 servers:
