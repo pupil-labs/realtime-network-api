@@ -13,7 +13,7 @@ You can either browse it on
 https://pupil-labs.github.io/realtime-network-api/ or see the
 [raw format here](https://raw.githubusercontent.com/pupil-labs/realtime-network-api/main/openapi_specification.yaml).
 
-## Client Implemenations
+## Client Implementations
 
 We have written a python client as a wrapper around the API that is very easy to use.
 - [Realtime Python API](https://pupil-labs-realtime-api.readthedocs.io)
