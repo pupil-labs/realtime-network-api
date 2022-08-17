@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   description: "Remote control and stream data from Pupil Invisible Companion"
-  version: "1.0.0"
+  version: "1.1.0"
   title: "Pupil Labs Realtime API"
 servers:
   - url: http://pi.local:8080/api
@@ -156,6 +156,9 @@ components:
         memory_state:
           type: string
           enum: ["OK", "LOW", "CRITICAL"]
+          readOnly: true
+        time_echo_port:
+          type: integer
           readOnly: true
     Hardware:
       properties:
