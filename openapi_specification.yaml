@@ -5,7 +5,9 @@ info:
   title: "Pupil Labs Realtime API"
 servers:
   - url: http://pi.local:8080/api
-    description: PI device server
+    description: Pupil Invisible default server URL
+  - url: http://neon.local:8080/api
+    description: Neon default server URL
 paths:
 
   /status:
