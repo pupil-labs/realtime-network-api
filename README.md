@@ -12,8 +12,8 @@ for the Pupil Labs Realtime Network API.
 You can either browse it on
 https://pupil-labs.github.io/realtime-network-api/ or see the raw formats here:
 
-- [Pupil Labs Neon Companion Realtime API v2.1.0](https://raw.githubusercontent.com/pupil-labs/realtime-network-api/main/neon/v2.1.0.yaml).
-- [Pupil Labs Invisible Companion Realtime API v1.1.0](https://raw.githubusercontent.com/pupil-labs/realtime-network-api/main/invisible/v1.1.0.yaml).
+- [Pupil Labs Neon Companion Realtime API v2.1.0](https://raw.githubusercontent.com/pupil-labs/realtime-network-api/main/neon/v2.1.0.yml).
+- [Pupil Labs Invisible Companion Realtime API v1.1.0](https://raw.githubusercontent.com/pupil-labs/realtime-network-api/main/invisible/v1.1.0.yml).
 
 ## Client Implementations
 

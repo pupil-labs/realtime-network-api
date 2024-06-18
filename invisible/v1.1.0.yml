@@ -6,8 +6,6 @@ info:
 servers:
   - url: http://pi.local:8080/api
     description: Pupil Invisible default server URL
-  - url: http://neon.local:8080/api
-    description: Neon default server URL
 paths:
   /status:
     get:
