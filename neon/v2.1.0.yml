@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Remote control and stream data from Pupil Invisible Companion
   version: 2.1.0
-  title: Pupil Labs Realtime API
+  title: Pupil Labs Neon Companion Realtime API
 servers:
   - url: http://neon.local:8080/api
     description: Neon device server
@@ -14,36 +14,36 @@ paths:
       summary: >-
         phone status; upgrade to websocket connection; updates about
         Phone/Sensor/Recording/NetworkDevice/Event updates
-      description: ''
+      description: ""
       responses:
-        '101':
+        "101":
           description: >-
             upgrade to websocket, send updates for
             Phone/Sensor/Recording/NetworkDevice/Event
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
-        '200':
+                $ref: "#/components/schemas/Status"
+        "200":
           description: phone status
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatusEnvelope'
+                $ref: "#/components/schemas/StatusEnvelope"
   /recording:start:
     post:
       tags:
         - recording
       summary: start recording
-      description: ''
+      description: ""
       responses:
-        '200':
+        "200":
           description: recording started
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecordingStartEnvelope'
-        '500':
+                $ref: "#/components/schemas/RecordingStartEnvelope"
+        "500":
           description: >-
             recording start failed <br />Possible errors: <br /> - Recording
             running <br /> - Template has required fields <br /> - Low battery
@@ -58,13 +58,13 @@ paths:
         stop and save recording, only possible if template has no required
         fields
       responses:
-        '200':
+        "200":
           description: recording stopped and saved
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecordingStopEnvelope'
-        '500':
+                $ref: "#/components/schemas/RecordingStopEnvelope"
+        "500":
           description: >-
             recording stop and save failed <br />Possible errors: <br /> -
             Recording not running <br /> - template has required fields
@@ -75,13 +75,13 @@ paths:
       summary: cancel recording
       description: cancel recording
       responses:
-        '200':
+        "200":
           description: recording stopped and discarded
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecordingCancelEnvelope'
-        '500':
+                $ref: "#/components/schemas/RecordingCancelEnvelope"
+        "500":
           description: >-
             recording cancel failed <br />Possible errors: <br /> - Recording
             not running
@@ -94,38 +94,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EventPost'
+              $ref: "#/components/schemas/EventPost"
       summary: create recording event
-      description: ''
+      description: ""
       responses:
-        '200':
+        "200":
           description: recording event added
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventEnvelope'
+                $ref: "#/components/schemas/EventEnvelope"
   /template_def:
     get:
       tags:
         - templates
       responses:
-        '200':
+        "200":
           description: active template definition
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TemplateDefEnvelope'
+                $ref: "#/components/schemas/TemplateDefEnvelope"
       summary: get template definition
-      description: ''
+      description: ""
   /template_data:
     get:
       tags:
         - templates
       responses:
-        '200':
+        "200":
           description: active template data
       summary: get template data
-      description: ''
+      description: ""
     post:
       tags:
         - templates
@@ -134,20 +134,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TemplateDataEnvelope'
+              $ref: "#/components/schemas/TemplateDataEnvelope"
       responses:
-        '200':
+        "200":
           description: filled template data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
-        '404':
+                $ref: "#/components/schemas/Envelope"
+        "404":
           description: Field ID not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: "#/components/schemas/Envelope"
 components:
   schemas:
     Envelope:
@@ -166,20 +166,20 @@ components:
         data:
           type: object
           oneOf:
-            - $ref: '#/components/schemas/Event'
-            - $ref: '#/components/schemas/Recording'
-            - $ref: '#/components/schemas/NetworkDevice'
-            - $ref: '#/components/schemas/Sensor'
-            - $ref: '#/components/schemas/Phone'
+            - $ref: "#/components/schemas/Event"
+            - $ref: "#/components/schemas/Recording"
+            - $ref: "#/components/schemas/NetworkDevice"
+            - $ref: "#/components/schemas/Sensor"
+            - $ref: "#/components/schemas/Phone"
     StatusEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
               type: array
               items:
-                $ref: '#/components/schemas/Status'
+                $ref: "#/components/schemas/Status"
     Phone:
       properties:
         ip:
@@ -251,11 +251,11 @@ components:
           readOnly: true
     RecordingStartEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/RecordingStart'
+              $ref: "#/components/schemas/RecordingStart"
     RecordingStop:
       properties:
         id:
@@ -268,11 +268,11 @@ components:
           readOnly: true
     RecordingStopEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/RecordingStop'
+              $ref: "#/components/schemas/RecordingStop"
     Recording:
       properties:
         id:
@@ -299,11 +299,11 @@ components:
           readOnly: true
     RecordingCancelEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/RecordingCancel'
+              $ref: "#/components/schemas/RecordingCancel"
     Event:
       properties:
         name:
@@ -330,11 +330,11 @@ components:
         timestamp: 1643899966134527000
     EventEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/Event'
+              $ref: "#/components/schemas/Event"
     Sensor:
       type: object
       properties:
@@ -380,8 +380,7 @@ components:
           type: array
           items:
             type: string
-          
-        
+
         help_text:
           description: short optional help text for the item
           type: string
@@ -413,7 +412,7 @@ components:
             - SECTION_HEADER
             - PAGE_BREAK
           type: string
-     
+
     Template:
       additionalProperties: false
       properties:
@@ -442,7 +441,7 @@ components:
           type: boolean
         items:
           items:
-            $ref: '#/components/schemas/TemplateItem'
+            $ref: "#/components/schemas/TemplateItem"
             type: object
           type: array
         label_ids:
@@ -476,31 +475,28 @@ components:
       required:
         - name
       type: object
-      
+
     TemplateDefEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
               type: array
               items:
-                $ref: '#/components/schemas/Template'
+                $ref: "#/components/schemas/Template"
     TemplateData:
       type: object
       additionalProperties:
         type: array
         items:
           type: string
-    
+
     TemplateDataEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
               type: object
-              $ref: '#/components/schemas/TemplateData'
-            
-          
-          
+              $ref: "#/components/schemas/TemplateData"
