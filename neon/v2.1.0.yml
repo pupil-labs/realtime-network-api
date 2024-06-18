@@ -123,31 +123,51 @@ paths:
         - templates
       responses:
         "200":
-          description: active template data
+          description: |
+            returns active template data, in format:
+            ```json
+            {
+              "question_uuid": ["one answer"],
+              "question_uuid": ["one", "or", "more", "answers"],
+              "question_uuid": ["5"],
+            }
+            ```
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplateDataEnvelope"
       summary: get template data
       description: ""
     post:
       tags:
         - templates
       requestBody:
-        description: set template data
+        description: |
+          set template data, using format:
+            ```json
+            {
+              "question_uuid": ["one answer"],
+              "question_uuid": ["one", "or", "more", "answers"],
+              "question_uuid": ["5"],
+            }
+            ```
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TemplateDataEnvelope"
+              $ref: "#/components/schemas/TemplateData"
       responses:
         "200":
           description: filled template data
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/TemplateDataEnvelope"
         "404":
           description: Field ID not found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/TemplateDataEnvelope"
 components:
   schemas:
     Envelope:
@@ -419,16 +439,8 @@ components:
         archived_at:
           format: date-time
           type: string
-        archived_by_user_id:
-          example: 00000000-0000-0000-0000-000000000000
-          format: uuid
-          type: string
         created_at:
           format: date-time
-          type: string
-        created_by_user_id:
-          example: 00000000-0000-0000-0000-000000000000
-          format: uuid
           type: string
         description:
           type: string
@@ -475,7 +487,6 @@ components:
       required:
         - name
       type: object
-
     TemplateDefEnvelope:
       allOf:
         - $ref: "#/components/schemas/Envelope"
@@ -491,7 +502,9 @@ components:
         type: array
         items:
           type: string
-
+      example:
+        f904ebe5-39f4-40c3-85cf-ba36a4d93805: ["answer"]
+        467a7b8c-ddbe-4315-ae3b-f36e8c7c29de: ["multiple", "choice"]
     TemplateDataEnvelope:
       allOf:
         - $ref: "#/components/schemas/Envelope"
