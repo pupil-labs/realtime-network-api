@@ -2,101 +2,100 @@ openapi: "3.0.0"
 info:
   description: "Remote control and stream data from Pupil Invisible Companion"
   version: "1.1.0"
-  title: "Pupil Labs Realtime API"
+  title: "Pupil Labs Invisible Companion Realtime API"
 servers:
   - url: http://pi.local:8080/api
     description: Pupil Invisible default server URL
   - url: http://neon.local:8080/api
     description: Neon default server URL
 paths:
-
   /status:
     get:
       tags:
-      - status
+        - status
       summary: "phone status; upgrade to websocket connection; updates about Phone/Sensor/Recording/NetworkDevice/Event updates"
       description: ""
       responses:
-        '200':
+        "200":
           description: "phone status"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatusEnvelope'
-        '101':
+                $ref: "#/components/schemas/StatusEnvelope"
+        "101":
           description: "upgrade to websocket, send updates for Phone/Sensor/Recording/NetworkDevice/Event"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: "#/components/schemas/Status"
 
   /recording:start:
     post:
       tags:
-      - recording
+        - recording
       summary: "start recording"
       description: ""
       responses:
-        '200':
-          description: 'recording started'
+        "200":
+          description: "recording started"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecordingStartEnvelope'
-        '500':
+                $ref: "#/components/schemas/RecordingStartEnvelope"
+        "500":
           description: "recording start failed <br />Possible errors: <br /> - Recording running <br /> - Template has required fields <br /> - Low battery <br /> - Low storage <br /> - No wearer selected <br /> - No workspace selected <br /> - Setup bottom sheets not completed"
 
   /recording:stop_and_save:
     post:
       tags:
-      - recording
+        - recording
       summary: "stop and save recording"
       description: "stop and save recording, only possible if template has no required fields"
       responses:
-        '200':
-          description: 'recording stopped and saved'
+        "200":
+          description: "recording stopped and saved"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecordingStopEnvelope'
-        '500':
+                $ref: "#/components/schemas/RecordingStopEnvelope"
+        "500":
           description: "recording stop and save failed <br />Possible errors: <br /> - Recording not running <br /> - template has required fields"
 
   /recording:cancel:
     post:
       tags:
-      - recording
+        - recording
       summary: "cancel recording"
       description: "cancel recording"
       responses:
-        '200':
-          description: 'recording stopped and discarded'
+        "200":
+          description: "recording stopped and discarded"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecordingCancelEnvelope'
-        '500':
+                $ref: "#/components/schemas/RecordingCancelEnvelope"
+        "500":
           description: "recording cancel failed <br />Possible errors: <br /> - Recording not running"
 
   /event:
     post:
       tags:
-      - events
+        - events
       requestBody:
         description: recording event
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EventPost'
+              $ref: "#/components/schemas/EventPost"
       summary: "create recording event"
       description: ""
       responses:
-        '200':
-          description: 'recording event added'
+        "200":
+          description: "recording event added"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventEnvelope'
+                $ref: "#/components/schemas/EventEnvelope"
 
 components:
   schemas:
@@ -116,20 +115,20 @@ components:
         data:
           type: object
           oneOf:
-          - $ref: '#/components/schemas/Event'
-          - $ref: '#/components/schemas/Recording'
-          - $ref: '#/components/schemas/NetworkDevice'
-          - $ref: '#/components/schemas/Sensor'
-          - $ref: '#/components/schemas/Phone'
+            - $ref: "#/components/schemas/Event"
+            - $ref: "#/components/schemas/Recording"
+            - $ref: "#/components/schemas/NetworkDevice"
+            - $ref: "#/components/schemas/Sensor"
+            - $ref: "#/components/schemas/Phone"
     StatusEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
               type: array
               items:
-                $ref: '#/components/schemas/Status'
+                $ref: "#/components/schemas/Status"
     Phone:
       properties:
         ip:
@@ -198,11 +197,11 @@ components:
 
     RecordingStartEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/RecordingStart'
+              $ref: "#/components/schemas/RecordingStart"
 
     RecordingStop:
       properties:
@@ -217,11 +216,11 @@ components:
 
     RecordingStopEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/RecordingStop'
+              $ref: "#/components/schemas/RecordingStop"
     Recording:
       properties:
         id:
@@ -245,11 +244,11 @@ components:
 
     RecordingCancelEnvelope:
       allOf:
-        - $ref: '#/components/schemas/Envelope'
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/RecordingCancel'
+              $ref: "#/components/schemas/RecordingCancel"
     Event:
       properties:
         name:
@@ -277,12 +276,12 @@ components:
         timestamp: 1643899966134527000
 
     EventEnvelope:
-       allOf:
-        - $ref: '#/components/schemas/Envelope'
+      allOf:
+        - $ref: "#/components/schemas/Envelope"
         - type: object
           properties:
             result:
-              $ref: '#/components/schemas/Event'
+              $ref: "#/components/schemas/Event"
     Sensor:
       type: object
       properties:
